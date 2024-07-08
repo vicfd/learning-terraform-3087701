@@ -118,7 +118,7 @@ resource "aws_instance" "blog" {
               #!/bin/bash
               useradd -m vicfd
               mkdir -p /home/vicfd/.ssh
-              cp /home/ec2-user/.ssh/authorized_keys /home/vicfd/.ssh/
+              cp /home/bitnami/.ssh/authorized_keys /home/vicfd/.ssh/
               chown -R vicfd:vicfd /home/vicfd/.ssh
               echo "vicfd ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
               EOF
