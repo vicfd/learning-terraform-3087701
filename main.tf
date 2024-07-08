@@ -121,15 +121,11 @@ resource "aws_instance" "blog" {
               cp /home/bitnami/.ssh/authorized_keys /home/vicfd/.ssh/
               chown -R vicfd:vicfd /home/vicfd/.ssh
               echo "vicfd ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+              sudo apt update
+              sudo apt install -y s3fs
+              sudo mkdir /mnt/s3
+              sudo s3fs my-bucket /mnt/s3 -o passwd_file=~/.passwd-s3fs -o allow_other -o umask=022
               EOF
-
-  provisioner "remote-exec" {
-    inline = [
-      "sudo apt update",
-      "sudo apt install -y s3fs",
-      "sudo mkdir /mnt/s3",
-      "sudo s3fs my-bucket /mnt/s3 -o passwd_file=~/.passwd-s3fs -o allow_other -o umask=022"
-    ]
 
   iam_instance_profile = aws_iam_instance_profile.my_instance_profile.name
 
