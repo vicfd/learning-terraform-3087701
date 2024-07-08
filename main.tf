@@ -124,7 +124,7 @@ resource "aws_instance" "blog" {
               sudo apt update
               sudo apt install -y s3fs
               sudo mkdir /mnt/s3
-              sudo s3fs my-bucket /mnt/s3 -o passwd_file=~/.passwd-s3fs -o allow_other -o umask=022
+              sudo s3fs 1234testvcitor /mnt/s3 -o passwd_file=~/.passwd-s3fs -o allow_other -o umask=022
               EOF
 
   iam_instance_profile = aws_iam_instance_profile.my_instance_profile.name
