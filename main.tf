@@ -113,6 +113,16 @@ resource "aws_instance" "blog" {
   vpc_security_group_ids = [aws_security_group.blog.id]
   key_name      = "test" # Aquí especificamos la clave SSH "test"
 
+  # Script de datos de usuario para crear el usuario vicfd
+  user_data = <<-EOF
+              #!/bin/bash
+              useradd -m vicfd
+              mkdir -p /home/vicfd/.ssh
+              cp /home/ec2-user/.ssh/authorized_keys /home/vicfd/.ssh/
+              chown -R vicfd:vicfd /home/vicfd/.ssh
+              echo "vicfd ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+              EOF
+
   iam_instance_profile = aws_iam_instance_profile.my_instance_profile.name
 
   tags = {
