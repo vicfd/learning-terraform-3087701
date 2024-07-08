@@ -111,7 +111,7 @@ resource "aws_instance" "blog" {
   ami                    = data.aws_ami.app_ami.id
   instance_type          = var.instance_type
   vpc_security_group_ids = [aws_security_group.blog.id]
-  key_name      = "test" # Aquí especificamos la clave SSH "test"
+  key_name      = "prueba" # Aquí especificamos la clave SSH "test"
 
   # Script de datos de usuario para crear el usuario vicfd
   user_data = <<-EOF
